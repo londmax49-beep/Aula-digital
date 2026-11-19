@@ -1,0 +1,320 @@
+{% extends "base.html" %}
+
+{% block title %}Aula Digital | Aprende y supera tus retos{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="tag">PLATAFORMA EDUCATIVA INTERACTIVA</span>
+
+        <h1>
+            Aprende a tu ritmo.
+            <span class="gradient-text">Supera cada reto.</span>
+        </h1>
+
+        <p>
+            Explora Matemáticas y Lengua y Comunicación a través de
+            60 niveles de aprendizaje, explicaciones, ejemplos, actividades,
+            juegos educativos y un examen final.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('registro') }}" class="btn">
+                🚀 Comenzar gratis
+            </a>
+
+            <a href="{{ url_for('login') }}" class="btn btn-secondary">
+                Iniciar sesión
+            </a>
+
+        </div>
+
+        <div class="hero-features">
+
+            <div>
+                <strong>60</strong>
+                <span>Niveles de aprendizaje</span>
+            </div>
+
+            <div>
+                <strong>6</strong>
+                <span>Juegos educativos</span>
+            </div>
+
+            <div>
+                <strong>100%</strong>
+                <span>Diploma gratuito</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="hero-orb">
+            <div class="orb-inner">🎓</div>
+        </div>
+
+        <div class="floating-card card-math">
+            <span>🧮</span>
+            <strong>Matemáticas</strong>
+            <small>Aprende y resuelve</small>
+        </div>
+
+        <div class="floating-card card-language">
+            <span>📚</span>
+            <strong>Lengua y Comunicación</strong>
+            <small>Lee, escribe y comprende</small>
+        </div>
+
+        <div class="floating-card card-game">
+            <span>🎮</span>
+            <strong>Zona Gamer</strong>
+            <small>Aprender jugando</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="features-section">
+
+    <div class="section-heading">
+
+        <span class="tag">DESCUBRE AULA DIGITAL</span>
+
+        <h2>Todo lo que necesitas para <span class="gradient-text">aprender</span></h2>
+
+        <p>
+            Una experiencia educativa diseñada para avanzar,
+            practicar y mejorar tus conocimientos.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <article class="feature-card">
+
+            <div class="feature-icon">🧮</div>
+
+            <h3>Matemáticas</h3>
+
+            <p>
+                Aprende operaciones, álgebra, geometría, porcentajes,
+                ecuaciones y mucho más mediante explicaciones y ejercicios.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">📖</div>
+
+            <h3>Lengua y Comunicación</h3>
+
+            <p>
+                Mejora tu ortografía, lectura, redacción, comprensión,
+                gramática y expresión.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">🎮</div>
+
+            <h3>6 juegos educativos</h3>
+
+            <p>
+                Diviértete con retos, preguntas, memoria, palabras,
+                rapidez y conocimientos.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">🧑‍🏫</div>
+
+            <h3>Profe Alex</h3>
+
+            <p>
+                Un asistente educativo para consultar temas,
+                resolver dudas y escuchar explicaciones.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">📺</div>
+
+            <h3>Videos educativos</h3>
+
+            <p>
+                Apoya tus lecciones con videos relacionados
+                con los temas que estás estudiando.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">🏆</div>
+
+            <h3>30 niveles por materia</h3>
+
+            <p>
+                Supera 30 niveles de Matemáticas y 30 de Lengua
+                y Comunicación para completar tu recorrido.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">📝</div>
+
+            <h3>Examen final</h3>
+
+            <p>
+                Demuestra lo que aprendiste con 20 preguntas
+                y consigue una calificación mínima de 70%.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">🎓</div>
+
+            <h3>Diploma gratuito</h3>
+
+            <p>
+                Completa los 60 niveles, aprueba el examen
+                y consigue tu diploma sin costo.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<section class="features-section">
+
+    <div class="gamer-banner">
+
+        <div>
+
+            <span class="tag">ZONA GAMER</span>
+
+            <h2>¡Aprender también es jugar! 🎮</h2>
+
+            <p>
+                Pon a prueba tu mente, mejora tus habilidades,
+                acumula puntos y supera desafíos educativos.
+            </p>
+
+            <a href="{{ url_for('registro') }}" class="btn">
+                Crear cuenta y comenzar
+            </a>
+
+        </div>
+
+        <div class="gamer-banner-icon">
+            🕹️
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="features-section">
+
+    <div class="section-heading">
+
+        <span class="tag">TU PROGRESO</span>
+
+        <h2>Tu camino hacia el <span class="gradient-text">éxito</span></h2>
+
+        <p>
+            Regístrate, selecciona tu grado y comienza
+            a avanzar en tu aprendizaje.
+        </p>
+
+    </div>
+
+    <div class="feature-grid">
+
+        <article class="feature-card">
+            <div class="feature-icon">1️⃣</div>
+            <h3>Selecciona tu grado</h3>
+            <p>Secundaria o preparatoria, de acuerdo con tu nivel de estudios.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-icon">2️⃣</div>
+            <h3>Estudia tus lecciones</h3>
+            <p>Aprende, lee las explicaciones y practica en cada nivel.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-icon">3️⃣</div>
+            <h3>Supera los 60 niveles</h3>
+            <p>Completa las dos materias y demuestra tus conocimientos.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-icon">4️⃣</div>
+            <h3>Obtén tu diploma</h3>
+            <p>Aprueba tu examen final y celebra tu logro.</p>
+        </article>
+
+    </div>
+
+</section>
+
+
+<section class="features-section">
+
+    <div class="diploma-card">
+
+        <div class="diploma-icon">🏅</div>
+
+        <span class="tag">META FINAL</span>
+
+        <h2>Tu esfuerzo merece ser reconocido</h2>
+
+        <p>
+            Completa Matemáticas y Lengua y Comunicación,
+            aprueba tu evaluación final y obtén tu diploma
+            de Aula Digital completamente gratis.
+        </p>
+
+        <a href="{{ url_for('registro') }}" class="btn">
+            Comenzar mi aprendizaje
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
