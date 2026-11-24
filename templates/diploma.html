@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Diploma | Aula Digital{% endblock %}
+
+{% block content %}
+
+<section class="diploma-page">
+
+    <div class="diploma-document">
+
+        <div class="diploma-decoration">✦ ✦ ✦</div>
+
+        <div class="diploma-logo">🎓 AULA DIGITAL</div>
+
+        <h1>Diploma de Reconocimiento</h1>
+
+        <p class="diploma-subtitle">
+            Se otorga el presente reconocimiento a:
+        </p>
+
+        <h2 class="diploma-name">{{ nombre }}</h2>
+
+        <p>
+            Por haber completado satisfactoriamente los
+            <strong>30 niveles educativos</strong>: 15 niveles de Matemáticas
+            y 15 niveles de Lengua y Comunicación, así como por haber aprobado
+            la evaluación final de Aula Digital.
+        </p>
+
+        <div class="diploma-score">
+            <span>Calificación final</span>
+            <strong>{{ calificacion }}/100</strong>
+        </div>
+
+        <div class="diploma-seal">
+            🏆
+        </div>
+
+        <p class="diploma-date">
+            Fecha de reconocimiento: {{ fecha }}
+        </p>
+
+        <p class="diploma-free">
+            RECONOCIMIENTO GRATUITO
+        </p>
+
+        <div class="diploma-footer">
+            <span>________________________</span>
+            <span>Aula Digital</span>
+        </div>
+
+        <button class="btn print-btn" onclick="window.print()">
+            🖨️ Imprimir diploma
+        </button>
+
+    </div>
+
+</section>
+
+{% endblock %}

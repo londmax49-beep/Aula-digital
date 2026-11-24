@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Digital</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+
+    <!-- VIDEO DE FONDO -->
+    <div class="fondo-video">
+        <video id="videoFondo" autoplay muted loop playsinline>
+            <source src="{{ url_for('static', filename='videos/fondo.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="fondo-overlay"></div>
+
+    <!-- NAVEGACIÓN -->
+    <header class="navbar">
+        <a href="{{ url_for('inicio') }}" class="logo">🎓 Aula Digital</a>
+
+        <nav>
+            <a href="{{ url_for('inicio') }}">Inicio</a>
+
+            {% if session.get('usuario_id') %}
+                <a href="{{ url_for('panel') }}">Panel</a>
+                <a href="{{ url_for('juegos') }}">Zona Gamer</a>
+                <a href="{{ url_for('examen') }}">Examen</a>
+                <a href="{{ url_for('salir') }}">Cerrar sesión</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Iniciar sesión</a>
+                <a href="{{ url_for('registro') }}">Registrarse</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="contenido-principal">
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% if mensajes %}
+                <div class="mensajes-flash">
+                    {% for categoria, mensaje in mensajes %}
+                        <div class="flash {{ categoria }}">{{ mensaje }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+    </main>
+
+    <!-- PROFE ALEX -->
+    {% if session.get('usuario_id') %}
+    <section id="profeAlex" class="profe-alex">
+
+        <!-- BOTÓN FLOTANTE -->
+        <button
+            id="botonAlex"
+            class="alex-toggle"
+            type="button"
+            onclick="toggleChatAlex()">
+            🤖 Profe Alex
+        </button>
+
+        <!-- VENTANA DEL CHAT -->
+        <div id="chatAlex" class="chat-alex" style="display: none;">
+
+            <!-- ENCABEZADO -->
+            <div class="chat-header">
+                <div>
+                    <strong>🤖 Profe Alex</strong>
+                    <span>.</span>
+                </div>
+
+                <button type="button" onclick="toggleChatAlex()">
+                    ✖
+                </button>
+            </div>
+
+            <!-- MENSAJES -->
+            <div id="chatMensajes" class="chat-mensajes">
+                <div class="mensaje alex">
+                    ¡Hola! Soy Profe Alex. Pregúntame algo de Matemáticas o Lengua y Comunicación.
+                </div>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="chat-controles">
+                <input
+                    type="text"
+                    id="mensajeAlex"
+                    placeholder="Escribe tu pregunta..."
+                    autocomplete="off">
+
+                <button type="button" id="microAlex" title="Dictar pregunta">
+                    🎤
+                </button>
+
+                <button type="button" id="enviarAlex"
+                    onclick="enviarAlexDirecto()">
+                    Enviar
+                </button>
+            </div>
+
+        </div>
+    </section>
+    {% endif %}
+
+    <script>
+function toggleChatAlex() {
+    const chat = document.getElementById("chatAlex");
+
+    if (!chat) return;
+
+    chat.style.display =
+        chat.style.display === "none" ? "flex" : "none";
+}
+
+async function AulaEnviarAlex() {
+    const entrada = document.getElementById("mensajeAlex");
+    const mensajes = document.getElementById("chatMensajes");
+    const boton = document.getElementById("enviarAlex");
+
+    if (!entrada || !mensajes || !boton) {
+        alert("No se encontraron los elementos del chat.");
+        return;
+    }
+
+    const pregunta = entrada.value.trim();
+
+    if (pregunta === "") return;
+
+    boton.disabled = true;
+    entrada.value = "";
+
+    const mensajeUsuario = document.createElement("div");
+    mensajeUsuario.className = "mensaje usuario";
+    mensajeUsuario.textContent = pregunta;
+    mensajes.appendChild(mensajeUsuario);
+
+    const respuestaAlex = document.createElement("div");
+    respuestaAlex.className = "mensaje alex";
+    respuestaAlex.textContent = "Estoy pensando...";
+    mensajes.appendChild(respuestaAlex);
+
+    try {
+        const resultado = await fetch(
+            "{{ url_for('preguntar_alex') }}",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    pregunta: pregunta
+                })
+            }
+        );
+
+        const datos = await resultado.json();
+
+        if (!resultado.ok) {
+            throw new Error(datos.respuesta || "Error del servidor");
+        }
+
+        respuestaAlex.textContent = datos.respuesta;
+
+        if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
+
+            const audio = new SpeechSynthesisUtterance(
+                datos.respuesta
+            );
+
+            audio.lang = "es-MX";
+            audio.volume = 1;
+
+            window.speechSynthesis.speak(audio);
+        }
+
+    } catch (error) {
+        respuestaAlex.textContent =
+            "No pude enviar tu mensaje. " + error.message;
+    }
+
+    boton.disabled = false;
+    mensajes.scrollTop = mensajes.scrollHeight;
+    entrada.focus();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const entrada = document.getElementById("mensajeAlex");
+
+    if (entrada) {
+        entrada.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                AulaEnviarAlex();
+            }
+        });
+    }
+});
+</script>
+
+<script src="{{ url_for('static', filename='js/juegos.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/navegacion.js') }}"></script>
+
+</body>
+</html>

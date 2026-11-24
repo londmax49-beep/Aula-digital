@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Resultado del examen | Aula Digital{% endblock %}
+
+{% block content %}
+
+<section class="result-wrapper">
+
+    <div class="result-card">
+
+        {% if aprobado %}
+
+            <div class="result-icon success-icon">🏆</div>
+
+            <span class="tag">¡EXAMEN APROBADO!</span>
+
+            <h1>¡Lo lograste!</h1>
+
+            <p>
+                Has demostrado tus conocimientos
+                en Matemáticas y Lengua y Comunicación.
+            </p>
+
+        {% else %}
+
+            <div class="result-icon fail-icon">📚</div>
+
+            <span class="tag">SIGUE PRACTICANDO</span>
+
+            <h1>No te rindas</h1>
+
+            <p>
+                Puedes volver a estudiar tus niveles
+                y presentar nuevamente el examen.
+            </p>
+
+        {% endif %}
+
+        <div class="score-circle">
+            <strong>{{ calificacion }}</strong>
+            <span>/ 100 puntos</span>
+        </div>
+
+        <div class="result-status">
+            {% if aprobado %}
+                <span class="status-approved">APROBADO</span>
+            {% else %}
+                <span class="status-failed">NO APROBADO</span>
+            {% endif %}
+        </div>
+
+        {% if aprobado %}
+
+            <a href="{{ url_for('diploma') }}" class="btn">
+                Obtener diploma 🏅
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('panel') }}" class="btn">
+                Regresar a estudiar
+            </a>
+
+            <a href="{{ url_for('examen') }}" class="btn btn-secondary">
+                Intentar nuevamente
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

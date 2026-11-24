@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Nivel {{ nivel }} | Aula Digital{% endblock %}
+
+{% block content %}
+
+<section class="lesson-header">
+
+    <span class="tag">{{ nombre_materia }}</span>
+
+    <h1>Nivel {{ nivel }}: {{ titulo }}</h1>
+
+    <p>Aprende el tema, responde las 4 preguntas y completa el ejercicio para continuar.</p>
+
+</section>
+
+<div class="lesson-layout">
+
+    <article class="lesson-box">
+
+        <h2>📖 Explicación</h2>
+
+        <p>{{ explicacion }}</p>
+
+        <div class="example-box">
+            <h3>💡 Ejemplo</h3>
+            <p>{{ ejemplo }}</p>
+        </div>
+
+    </article>
+
+    <article class="lesson-box">
+
+        <h2>✏️ Actividad</h2>
+
+        {% if mensaje %}
+            <p class="tag">{{ mensaje }}</p>
+        {% endif %}
+
+        {% if not preguntas_completadas %}
+
+            <form method="POST">
+
+                <input type="hidden" name="accion" value="preguntas">
+
+                {% for pregunta in preguntas %}
+
+                    {% set numero_pregunta = loop.index0 %}
+
+                    <div class="question-block">
+
+                        <h3>Pregunta {{ loop.index }} de 4</h3>
+
+                        <p>{{ pregunta.pregunta }}</p>
+
+                        <div class="lesson-options">
+
+                            {% for opcion in pregunta.opciones %}
+
+                                <label class="answer-option">
+
+                                    <input type="radio"
+                                           name="q{{ numero_pregunta }}"
+                                           value="{{ opcion }}"
+                                           required>
+
+                                    <span>{{ opcion }}</span>
+
+                                </label>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+                <button type="submit" class="btn btn-full">
+                    Comprobar las 4 respuestas
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <p>🎉 ¡Has respondido correctamente las 4 preguntas!</p>
+
+            <div class="example-box">
+
+                <h3>🏆 Ejercicio final</h3>
+
+                <p>{{ ejercicio.pregunta }}</p>
+
+                <form method="POST">
+
+                    <input type="hidden" name="accion" value="ejercicio">
+
+                    <label for="ejercicio_respuesta">
+                        Escribe tu respuesta:
+                    </label>
+
+                    <input type="text"
+                           id="ejercicio_respuesta"
+                           name="ejercicio_respuesta"
+                           placeholder="Escribe tu respuesta"
+                           required>
+
+                    <button type="submit" class="btn btn-full">
+                        Comprobar ejercicio
+                    </button>
+
+                </form>
+
+            </div>
+
+        {% endif %}
+
+    </article>
+
+    <article class="lesson-box video-box">
+
+        <h2>🎥 Video de apoyo</h2>
+
+        <p>
+            Mira una explicación adicional sobre
+            <strong>{{ titulo }}</strong>.
+        </p>
+
+        {% if materia == "matematicas" %}
+
+            <a class="btn btn-secondary"
+               target="_blank"
+               rel="noopener"
+               href="https://www.youtube.com/results?search_query={{ titulo|urlencode }}+matematicas+explicacion">
+                Buscar video educativo
+            </a>
+
+        {% else %}
+
+            <a class="btn btn-secondary"
+               target="_blank"
+               rel="noopener"
+               href="https://www.youtube.com/results?search_query={{ titulo|urlencode }}+lengua+espanola+explicacion">
+                Buscar video educativo
+            </a>
+
+        {% endif %}
+
+    </article>
+
+</div>
+
+<a href="{{ url_for('materia', materia=materia) }}"
+   class="btn btn-secondary">
+    ← Regresar a los niveles
+</a>
+
+{% endblock %}

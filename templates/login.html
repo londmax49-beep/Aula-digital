@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión | Aula Digital{% endblock %}
+
+{% block content %}
+
+<section class="auth-wrapper">
+
+    <div class="auth-card">
+
+        <div class="auth-icon">👋</div>
+
+        <span class="tag">BIENVENIDO DE NUEVO</span>
+
+        <h1>Iniciar sesión</h1>
+
+        <p>Continúa aprendiendo y avanzando.</p>
+
+        <form method="POST">
+
+            <label>Correo electrónico</label>
+
+            <input type="email"
+                   name="correo"
+                   placeholder="correo@ejemplo.com"
+                   required>
+
+            <label>Contraseña</label>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Tu contraseña"
+                   required>
+
+            <button type="submit" class="btn btn-full">
+                Entrar a Aula Digital
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            ¿No tienes cuenta?
+            <a href="{{ url_for('registro') }}">Regístrate</a>
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

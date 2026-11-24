@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Juegos de Lengua y Comunicación{% endblock %}
+
+{% block content %}
+<section class="lengua-juegos">
+    <header class="lengua-header">
+        <span>📚 Aula Digital</span>
+        <h1>Juegos de Lengua y Comunicación</h1>
+        <p>¡Aprende, practica y diviértete con seis retos diferentes!</p>
+        <a href="{{ url_for('juegos') }}" class="volver-juegos">Volver a Matemáticas</a>
+    </header>
+
+    <div class="lengua-grid">
+        <article class="lengua-card">
+            <div class="emoji">🔎</div>
+            <h2>1. Detectives de ortografía</h2>
+            <p>Encuentra la palabra escrita correctamente.</p>
+            <div id="ortografia" class="zona-juego"></div>
+        </article>
+
+        <article class="lengua-card">
+            <div class="emoji">🧠</div>
+            <h2>2. Cazadores de sinónimos</h2>
+            <p>Descubre palabras que tienen un significado parecido.</p>
+            <div id="sinonimos" class="zona-juego"></div>
+        </article>
+
+        <article class="lengua-card">
+            <div class="emoji">✍️</div>
+            <h2>3. Acentos perdidos</h2>
+            <p>Identifica dónde debe colocarse la tilde.</p>
+            <div id="acentos" class="zona-juego"></div>
+        </article>
+
+        <article class="lengua-card">
+            <div class="emoji">📖</div>
+            <h2>4. Comprensión lectora</h2>
+            <p>Lee con atención y responde las preguntas.</p>
+            <div id="lectura" class="zona-juego"></div>
+        </article>
+
+        <article class="lengua-card">
+            <div class="emoji">🔤</div>
+            <h2>5. Ordena la oración</h2>
+            <p>Acomoda las palabras para formar una oración.</p>
+            <div id="oraciones" class="zona-juego"></div>
+        </article>
+
+        <article class="lengua-card">
+            <div class="emoji">❗</div>
+            <h2>6. Maestros de puntuación</h2>
+            <p>Elige el signo de puntuación que corresponde.</p>
+            <div id="puntuacion" class="zona-juego"></div>
+        </article>
+    </div>
+</section>
+
+<style>
+.lengua-juegos {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 16px;
+}
+.lengua-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.lengua-header h1 {
+    margin: 12px 0;
+}
+.volver-juegos {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+}
+.lengua-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+.lengua-card {
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.96);
+    color: #172033;
+    box-shadow: 0 5px 18px rgba(0,0,0,.15);
+}
+.lengua-card h2 {
+    font-size: 19px;
+}
+.emoji {
+    font-size: 34px;
+}
+.zona-juego {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+}
+.zona-juego button {
+    display: inline-block;
+    margin: 5px 4px 5px 0;
+    padding: 9px 13px;
+    border: 0;
+    border-radius: 9px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+.zona-juego button:disabled {
+    opacity: .65;
+    cursor: default;
+}
+.pregunta-lengua {
+    font-weight: bold;
+    margin: 10px 0;
+}
+.texto-lectura {
+    padding: 10px;
+    border-radius: 9px;
+    background: #eef4ff;
+    line-height: 1.5;
+}
+.resultado-lengua {
+    min-height: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+{% endblock %}

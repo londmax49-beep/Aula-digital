@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}{{ nombre_materia }} | Aula Digital{% endblock %}
+
+{% block content %}
+
+<section class="lesson-header">
+
+    <span class="tag">RUTA DE APRENDIZAJE</span>
+
+    <h1>{{ nombre_materia }}</h1>
+
+    <p>
+        Completa cada nivel para desbloquear el siguiente.
+        Aprende, practica y demuestra tus conocimientos.
+    </p>
+
+    <div class="subject-progress-large">
+        <strong>{{ completados|length }}/15</strong>
+        <span>niveles completados</span>
+    </div>
+
+</section>
+
+<section class="levels-section">
+
+    <div class="levels-grid">
+
+        {% for tema in temas[:15] %}
+
+            {% set numero = loop.index %}
+
+            {% if numero == 1 or numero - 1 in completados %}
+                {% set desbloqueado = true %}
+            {% else %}
+                {% set desbloqueado = false %}
+            {% endif %}
+
+            <article class="level-card
+                {% if numero in completados %}level-completed{% endif %}
+                {% if not desbloqueado %}level-locked{% endif %}">
+
+                <div class="level-number">
+                    {% if numero in completados %}
+                        ✓
+                    {% elif desbloqueado %}
+                        {{ numero }}
+                    {% else %}
+                        🔒
+                    {% endif %}
+                </div>
+
+                <h3>Nivel {{ numero }}</h3>
+
+                <p>{{ tema[0] }}</p>
+
+                {% if numero in completados %}
+                    <span class="level-status">Completado</span>
+
+                {% elif desbloqueado %}
+                    <a href="{{ url_for('nivel', materia=materia, nivel=numero) }}"
+                       class="btn btn-small">
+                        Comenzar
+                    </a>
+
+                {% else %}
+                    <span class="level-status locked">Bloqueado</span>
+                {% endif %}
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<a href="{{ url_for('panel') }}" class="btn btn-secondary">
+    ← Regresar al panel
+</a>
+
+{% endblock %}
